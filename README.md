@@ -40,6 +40,9 @@ GrayTell is an **AI research agent** that doesn't just chat — it *investigates
 
 It's built as a multi-provider gateway: one chat interface that routes to **5 different AI providers** (Groq, OpenRouter, Mistral, Ollama Cloud, and ZAI), giving you access to **30+ frontier models** — all through a single unified API.
 
+
+### company description
+
 ---
 
 ## Architecture
