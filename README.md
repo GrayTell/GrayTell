@@ -1,13 +1,22 @@
 <p align="center">
-  <img src="https://graytellai.space-z.ai/graytell-logo.jpg" alt="GrayTell" width="80" height="80" />
+  <img src="https://graytellai.space-z.ai/silencly-logo.jpg" alt="GrayTell" width="80" height="80" />
 </p>
 
 <h1 align="center">GrayTell</h1>
 
 <p align="center">
   <strong>Deep-research AI agent with multi-provider model routing, real-time tool calling, and streaming answers.</strong><br/>
-  Ask a question → the agent searches the web, reads pages, reasons through sources, and writes a cited answer — all live.
+  Ask a question → the agent searches the web, reads pages, reasons through sources, and writes a cited answer — all live.Please note that this is just an explanation of how it works nit the full thing it self . Built by Anubhav Sapkota only the founder of Graytell org .
 </p>
+
+#Social links
+website : https://graytellai.space-z.ai
+x : https://x.com/graytell_org
+github : https://github.com/graytell_org
+instagram : https://instagram.com/graytell
+porfolia : anubhavsapkota.space-z.ai
+
+## please note that we are a small startup and impersio and silencly have beeen bought by graytell . the logo is not allowed to copy same for the name and brand colour. 
 
 <p align="center">
   <a href="#architecture">Architecture</a> ·
@@ -386,126 +395,10 @@ graph TB
 
 ---
 
-## Project Structure
 
-```
-graytell/
-├── src/
-│   ├── app/
-│   │   ├── api/
-│   │   │   ├── chat/route.ts          # Streaming chat API (agent loop)
-│   │   │   ├── memories/route.ts      # Memory CRUD
-│   │   │   └── mcp/                   # MCP integration
-│   │   ├── chat/
-│   │   │   ├── layout.tsx             # Chat shell (sidebar + main)
-│   │   │   └── s/[uuid]/page.tsx      # Individual conversation
-│   │   ├── settings/page.tsx          # User settings + memory manager
-│   │   ├── auth/page.tsx              # Sign-in screen
-│   │   └── page.tsx                   # Landing page
-│   │
-│   ├── components/
-│   │   ├── chat/
-│   │   │   ├── app-sidebar.tsx        # Conversation list + user menu
-│   │   │   ├── chat-view.tsx          # Main chat interface
-│   │   │   ├── composer.tsx           # Message input + model picker
-│   │   │   ├── messages.tsx           # Message renderer
-│   │   │   ├── timeline.tsx           # Research step timeline
-│   │   │   ├── model-picker.tsx       # Model selector dropdown
-│   │   │   ├── model-logo.tsx         # Provider logo mapping
-│   │   │   ├── citations.tsx          # Inline source citations
-│   │   │   └── types.ts               # Shared types
-│   │   ├── model-options.ts           # 30+ model definitions
-│   │   ├── sign-in-screen.tsx         # Auth UI
-│   │   └── ui/                        # shadcn/ui components
-│   │
-│   ├── lib/
-│   │   ├── groq.ts                    # Groq API client (SSE)
-│   │   ├── openrouter.ts              # OpenRouter API client (SSE)
-│   │   ├── mistral.ts                 # Mistral API client (SSE)
-│   │   ├── ollama.ts                  # Ollama Cloud client (NDJSON→SSE)
-│   │   ├── research-tools.ts          # Tool definitions + runtime
-│   │   ├── guest-limit.ts             # Guest usage limits
-│   │   ├── memories.ts                # User memory system
-│   │   ├── supabase/                  # Supabase clients
-│   │   ├── db.ts                      # Prisma client
-│   │   └── utils.ts                   # Utilities
-│   │
-│   ├── hooks/
-│   │   ├── use-chat-store.ts          # Chat state (Zustand)
-│   │   ├── use-chat-stream.ts         # NDJSON stream consumer
-│   │   ├── use-chat-route.ts          # API caller
-│   │   └── use-app-view.ts            # Auth + app state
-│   │
-│   └── agent/                         # Agent system prompt + tools
-│
-├── prisma/
-│   └── schema.prisma                  # Database schema
-│
-├── public/                            # Static assets
-├── .env                               # API keys
-└── package.json
-```
 
 ---
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18+ or Bun
-- API keys for at least one provider (Mistral is the default)
-
-### Installation
-
-```bash
-cd graytell
-bun install
-```
-
-### Environment Setup
-
-```bash
-cp .env.example .env
-```
-
-Required environment variables:
-
-```env
-# ZAI SDK (GLM models)
-ZAI_API_KEY=your_zai_key
-
-# Mistral (default provider)
-MISTRAL_API_KEY=your_mistral_key
-
-# Groq (optional — for Nemotron Lightning)
-GROQ_API_KEY=your_groq_key
-
-# OpenRouter (optional — for free model marketplace)
-OPENROUTER_API_KEY=your_openrouter_key
-
-# Ollama Cloud (optional — for open-weight models)
-OLLAMA_API_KEY=your_ollama_key
-
-# Supabase (optional — for auth & data)
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-```
-
-### Run the Database
-
-```bash
-bun run db:push
-```
-
-### Start Development
-
-```bash
-bun run dev
-```
-
-The app runs on `http://localhost:3000`.
-
----
 
 ## Key Design Decisions
 
@@ -536,7 +429,7 @@ The chat state is relatively simple and doesn't need Redux's middleware ecosyste
 
 ## License
 
-MIT
+apache 2.0
 
 ---
 
