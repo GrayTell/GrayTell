@@ -47,6 +47,10 @@ It routes across **5 providers** and **30+ models** through a single interface, 
 
 ### High-level overview
 
+## Architecture
+
+### High-level overview
+
 ```mermaid
 graph TB
     subgraph Client ["Browser"]
@@ -61,17 +65,17 @@ graph TB
         ToolRuntime[Tool Runtime]
     end
 
-    subgraph Providers
-        Groq
-        OpenRouter
-        Mistral
-        Ollama
-        ZAI
+    subgraph Providers ["AI Providers"]
+        Groq[Groq]
+        OpenRouter[OpenRouter]
+        Mistral[Mistral]
+        Ollama[Ollama Cloud]
+        ZAI[ZAI]
     end
 
-    subgraph Tools
-        WebSearch
-        PageReader
+    subgraph Tools ["Research Tools"]
+        WebSearch[Web Search]
+        PageReader[Page Reader]
         SocialSearch["X / Reddit / GitHub / ..."]
     end
 
@@ -79,24 +83,14 @@ graph TB
     ChatAPI --> AgentLoop
     AgentLoop --> ProviderRouter
     AgentLoop --> ToolRuntime
-    ProviderRouter --> Providers
-    ToolRuntime --> Tools
-Agent loop
-
-Search mode: max 8 rounds
-Deep mode: max 12 rounds
-Multiple tool calls can run in parallel each round
-If the round limit is hit, the system forces a final answer
-
-Streaming protocol (NDJSON)
-jsonc{"type": "meta", "model": "mistral-medium-latest", "mode": "deep"}
-{"type": "step.start", "stepId": "s1", "tool": "exa_search", "label": "Web search"}
-{"type": "step.thinking", "stepId": "s1", "text": "I need recent information about..."}
-{"type": "step.input", "stepId": "s1", "queries": ["..."]}
-{"type": "step.output", "stepId": "s1", "results": [...]}
-{"type": "step.done", "stepId": "s1"}
-{"type": "answer.delta", "text": "Based on the sources..."}
-{"type": "answer.done"}
+    ProviderRouter --> Groq
+    ProviderRouter --> OpenRouter
+    ProviderRouter --> Mistral
+    ProviderRouter --> Ollama
+    ProviderRouter --> ZAI
+    ToolRuntime --> WebSearch
+    ToolRuntime --> PageReader
+    ToolRuntime --> SocialSearch
 
 Research Tools
 
