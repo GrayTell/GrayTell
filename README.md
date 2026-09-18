@@ -1,3 +1,4 @@
+
 <p align="center">
   <img src="https://graytellai.space-z.ai/silencly-logo.jpg" alt="GrayTell" width="80" height="80" />
 </p>
@@ -47,10 +48,6 @@ It routes across **5 providers** and **30+ models** through a single interface, 
 
 ### High-level overview
 
-## Architecture
-
-### High-level overview
-
 ```mermaid
 graph TB
     subgraph Client ["Browser"]
@@ -91,108 +88,103 @@ graph TB
     ToolRuntime --> WebSearch
     ToolRuntime --> PageReader
     ToolRuntime --> SocialSearch
+```
 
-Research Tools
+### Agent loop
 
+- **Search mode**: max 8 rounds
+- **Deep mode**: max 12 rounds
+- Multiple tool calls can run in parallel each round
+- If the round limit is hit, the system forces a final answer
 
+### Streaming protocol (NDJSON)
 
+```jsonc
+{"type": "meta", "model": "mistral-medium-latest", "mode": "deep"}
+{"type": "step.start", "stepId": "s1", "tool": "exa_search", "label": "Web search"}
+{"type": "step.thinking", "stepId": "s1", "text": "I need recent information about..."}
+{"type": "step.input", "stepId": "s1", "queries": ["..."]}
+{"type": "step.output", "stepId": "s1", "results": [...]}
+{"type": "step.done", "stepId": "s1"}
+{"type": "answer.delta", "text": "Based on the sources..."}
+{"type": "answer.done"}
+```
 
+---
 
+## Research Tools
 
+| Tool              | Purpose                        | Fallback |
+|-------------------|--------------------------------|----------|
+| `exa_search`      | General web search             | ZAI      |
+| `read_page`       | Full page content extraction   | ZAI      |
+| `exa_map`         | Crawl site structure           | —        |
+| `reddit_search`   | Reddit posts & discussions     | ZAI      |
+| `x_search`        | X / Twitter posts & threads    | ZAI      |
+| `github_search`   | Repos, issues, PRs             | ZAI      |
+| `youtube_search`  | Videos & channels              | ZAI      |
+| `linkedin_search` | Profiles & companies           | ZAI      |
+| + others          | Facebook, Instagram, Threads, Snapchat | ZAI |
 
+---
 
+## Multi-Provider Routing
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-ToolPurposeFallbackexa_searchGeneral web searchZAIread_pageFull page content extractionZAIexa_mapCrawl site structure—reddit_searchReddit posts & discussionsZAIx_searchX / Twitter posts & threadsZAIgithub_searchRepos, issues, PRsZAIyoutube_searchVideos & channelsZAIlinkedin_searchProfiles & companiesZAI+ othersFacebook, Instagram, Threads, SnapchatZAI
-
-Multi-Provider Routing
 GrayTell does not lock you to one provider.
-Supported providers:
 
-Groq — ultra-fast inference
-OpenRouter — broad model marketplace
-Mistral — strong reasoning models
-Ollama Cloud — open-weight models
-ZAI — GLM family + built-in tools
+Supported providers:
+- **Groq** — ultra-fast inference
+- **OpenRouter** — broad model marketplace
+- **Mistral** — strong reasoning models
+- **Ollama Cloud** — open-weight models
+- **ZAI** — GLM family + built-in tools
 
 Custom adapter converts Ollama’s native NDJSON format into OpenAI-compatible SSE so the rest of the system stays uniform.
 
-Tech Stack
+---
 
-Frontend: React + Next.js App Router
-State: Zustand
-Backend: Next.js API routes + streaming NDJSON
-Auth / DB: Supabase + Prisma
-Tools: Exa (optional) + ZAI fallback chain
+## Tech Stack
 
+- **Frontend**: React + Next.js App Router
+- **State**: Zustand
+- **Backend**: Next.js API routes + streaming NDJSON
+- **Auth / DB**: Supabase + Prisma
+- **Tools**: Exa (optional) + ZAI fallback chain
 
-Getting Started
-Detailed setup instructions coming soon.
+---
 
-For now, see the website: graytellai.space-z.ai
+## Getting Started
 
-Status
+Detailed setup instructions coming soon.  
+For now, see the website: [graytellai.space-z.ai](https://graytellai.space-z.ai)
+
+---
+
+## Status
+
 GrayTell is early-stage and under active development.
-Current focus:
 
-Improving citation faithfulness
-Better tool selection and error handling
-Clearer research timeline
-Open evaluation of agent reliability
+Current focus:
+- Improving citation faithfulness
+- Better tool selection and error handling
+- Clearer research timeline
+- Open evaluation of agent reliability
 
 We are not claiming to be a full AI safety lab yet. We are building the foundations for more transparent and verifiable research agents.
 
-Links
+---
 
-Website: graytellai.space-z.ai
-X: @GrayTell_Org
-GitHub: github.com/GrayTell
+## Links
 
+- Website: [graytellai.space-z.ai](https://graytellai.space-z.ai)
+- X: [@GrayTell_Org](https://x.com/GrayTell_Org)
+- GitHub: [github.com/GrayTell](https://github.com/GrayTell)
 
-License
+---
+
+## License
+
 Apache License 2.0
+```
+
+Copy everything above and replace the entire contents of your `README.md` with it.
